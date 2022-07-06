@@ -1,4 +1,4 @@
-service: flights_lambda
+service: flights-lambda
 
 provider:
   name: aws
