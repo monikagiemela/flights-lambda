@@ -1,7 +1,7 @@
 from os import path
 import time
 import csv
-from Flight_Scrapers.BaseCall import BaseCall
+from BaseCall import BaseCall
 from EmailSender import send_email
 
 

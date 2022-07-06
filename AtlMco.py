@@ -14,7 +14,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
 from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException
-from Flight_Scrapers.BaseCall import BaseCall
+from BaseCall import BaseCall
 from EmailSender import send_email
 
 

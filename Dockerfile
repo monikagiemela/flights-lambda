@@ -14,8 +14,11 @@ RUN pip install selenium
 COPY --from=build /opt/chrome-linux /opt/chrome
 COPY --from=build /opt/chromedriver /opt/
 COPY lambda_function.py ./
-RUN mkdir ./Flight_Scrapers/
-COPY Flight_Scrapers/ ./
+COPY AltMco.py ./
+COPY BaseCall.py ./
+COPY DfwOrd.py ./
+COPY LaxJfk.py ./
+COPY LgaOrd.py ./
 ADD EmailSender.py ./
 COPY params.py ./
 CMD [ "lambda_function.lambda_handler" ]

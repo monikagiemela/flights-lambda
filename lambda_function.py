@@ -1,8 +1,8 @@
 import json
 from datetime import datetime
-from Flight_Scrapers.LaxJfk import LaxJfk
-from Flight_Scrapers.LgaOrd import LgaOrd
-from Flight_Scrapers.DfwOrd import DfwOrd
+from LaxJfk import LaxJfk
+from LgaOrd import LgaOrd
+from DfwOrd import DfwOrd
 #from AtlMco import AtlMco
 
 def lambda_handler(event, context):
