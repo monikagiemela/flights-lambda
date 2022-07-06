@@ -10,6 +10,7 @@ from params import make_day_params
 class BaseCall:    
     def __init__(self):
         chrome_options = webdriver.ChromeOptions()
+        chrome_options.binary_location = '/opt/chrome/chrome'
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument('--start-maximized')
