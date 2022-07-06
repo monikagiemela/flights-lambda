@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException
-from webdriver_manager.chrome import ChromeDriverManager
+from tempfile import mkdtemp
 from params import make_day_params
 
 
@@ -16,7 +16,13 @@ class BaseCall:
         chrome_options.add_argument('--start-fullscreen')
         chrome_options.add_argument('--single-process')
         chrome_options.add_argument("--disable-dev-shm-usage")
-        self.browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        chrome_options.add_argument("--disable-dev-tools")
+        chrome_options.add_argument("--no-zygote")
+        chrome_options.add_argument(f"--user-data-dir={mkdtemp()}")
+        chrome_options.add_argument(f"--data-path={mkdtemp()}")
+        chrome_options.add_argument(f"--disk-cache-dir={mkdtemp()}")
+        chrome_options.add_argument("--remote-debugging-port=9222")
+        self.browser = webdriver.Chrome("/opt/chromedriver",options=chrome_options)
         self.journeys = []
     
     def make_journeys(self, outgoing_delta, return_delta):
