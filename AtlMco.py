@@ -82,7 +82,7 @@ class AtlMco(BaseCall):
             airports = f"{self.origin}-{self.destination}"
             fieldnames =["airports", "outgoing", "incoming", "price"]
             writer = csv.DictWriter(file, fieldnames=fieldnames)
-            if not isfile("flight_prices.csv"):
+            if not isfile("/tmp/flight_prices.csv"):
                 writer.writeheader()
             for price in prices[:10]:
                 price = re.sub("[USD$]", "", price)
@@ -92,7 +92,7 @@ class AtlMco(BaseCall):
     def execute(self):
         self.make_journeys(7, 5)
         self.make_journeys(30, 5)
-        with open("flight_prices.csv", "a", newline='') as file:
+        with open("/tmp/flight_prices.csv", "a", newline='') as file:
             for journey in self.journeys:
                 url = self.make_url(journey)
                 self.send_request(url)

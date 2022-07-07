@@ -16,7 +16,7 @@ def lambda_handler(event, context):
         lga_ord = LgaOrd()
         lga_ord.execute()
 
-    elif datetime.today().isoweekday() == 3:
+    elif datetime.today().isoweekday() == 4:
         dfw_ord = DfwOrd()
         dfw_ord.execute()
     

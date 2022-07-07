@@ -22,7 +22,7 @@ class LgaOrd(BaseCall):
         airports = f"{self.origin}-{self.destination}"
         fieldnames =["airports", "outbound", "returning", "price"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
-        if not path.isfile("/temp/flight_prices.csv"):
+        if not path.isfile("/tmp/flight_prices.csv"):
             writer.writeheader()
         for price in prices[:10]:
             price = price.replace("$", "")
@@ -32,7 +32,7 @@ class LgaOrd(BaseCall):
     def execute(self):
         self.make_journeys(7, 4)
         self.make_journeys(30, 4)
-        with open("/temp/flight_prices.csv", "w", newline='') as file:
+        with open("/tmp/flight_prices.csv", "w", newline='') as file:
             for journey in self.journeys:
                 url = self.make_url(journey)
                 prices = self.send_request(url)
