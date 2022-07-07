@@ -11,7 +11,7 @@ def send_email(origin, destination):
     EMAIL_ADDRESS = "monikagiemela.coding@gmail.com"
     MAIL_PWD = os.environ["MAIL_PWD"]
     RECEPIENTS = ["monisiastella@gmail.com"]
-    ATTACHMENT_PATH = ["/temp/flight_prices.csv"]
+    ATTACHMENT_PATH = ["/tmp/flight_prices.csv"]
 
     # create message object
     msg = MIMEMultipart()
