@@ -8,31 +8,32 @@ from email.mime.multipart import MIMEMultipart
 from email import encoders
 
 def send_email(origin, destination):
+    # Mail parameters
     EMAIL_ADDRESS = "monikagiemela.coding@gmail.com"
     MAIL_PWD = os.environ["MAIL_PWD"]
     RECEPIENTS = ["monisiastella@gmail.com"]
-    ATTACHMENT_PATH = ["/tmp/flight_prices.csv"]
+    ATTACHMENT_PATHS = ["/tmp/flight_prices.csv", "/tmp/screen_shot.png"]
 
-    # create message object
+    # Create message object
     msg = MIMEMultipart()
     msg['From'] = EMAIL_ADDRESS
     msg['To'] = ','.join(RECEPIENTS)
     msg['Subject'] = "Ceny Lotów"
-    # mail server parameters
+    # Mail server parameters
     smtpHost = "smtp.gmail.com"
     smtpPort = 587
-    mail_content_html = f"Cześć Tomek, <br/> Przesyłam zestawienie cen lotów dla <b>{origin}-{destination}</b> z dnia <b>{datetime.today()}</b>"
-    #msg.attach(MIMEText(mailContentText, 'plain'))
+    
+    mail_content_html = f"Zestawienie cen lotów dla <b>{origin}-{destination}</b> z dnia <b>{datetime.today()}</b>"
     msg.attach(MIMEText(mail_content_html, 'html'))
 
-    # create file attachments
-    for aPath in ATTACHMENT_PATH:
-        # check if file exists
+    # Create file attachments
+    for path in ATTACHMENT_PATHS:
+        # Check if file exists
         part = MIMEBase('application', "octet-stream")
-        part.set_payload(open(aPath, "rb").read())
+        part.set_payload(open(path, "rb").read())
         encoders.encode_base64(part)
         part.add_header('Content-Disposition',
-                        f'attachment; filename="{os.path.basename(aPath)}"')
+                        f'attachment; filename="{os.path.basename(path)}"')
         msg.attach(part)
     
     # Send message object as email using smptplib
@@ -43,7 +44,7 @@ def send_email(origin, destination):
     sendErrs = s.sendmail(EMAIL_ADDRESS, RECEPIENTS, msgText)
     s.quit()
 
-    # check if errors occured and handle them accordingly
+    # Check if errors occured and handle them accordingly
     if not len(sendErrs.keys()) == 0:
-        raise Exception("Errors occurred while sending email", sendErrs)
-    print("execution complete...")
+        raise Exception("INFO: Errors occurred while sending email", sendErrs)
+    print("INFO: Excution complete...")

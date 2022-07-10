@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException
+from bs4 import BeautifulSoup
 from tempfile import mkdtemp
 from params import make_day_params
 
@@ -33,11 +34,17 @@ class BaseCall:
     def send_request(self, url):
         self.browser.get(url)
         self.browser.implicitly_wait(30)
-        time.sleep(45)
+        print("BROWSER IS RUNNING...")
+        time.sleep(45)        
         # Close cookies pop-up
         try:
             self.browser.find_element(by=By.CLASS_NAME, value="bBPb-close").click()
         except (NoSuchElementException, ElementNotInteractableException):
             pass
+        self.browser.save_screenshot("/tmp/screen_shot.png")
+        html = self.browser.page_source
+        soup = BeautifulSoup(html, 'html.parser')
+        print(soup.prettify())
         prices = [el.text for el in self.browser.find_elements(by=By.CLASS_NAME, value="price-text")]
+        print(f"PRICES: {prices}")
         return prices
