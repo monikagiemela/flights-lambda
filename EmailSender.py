@@ -7,11 +7,11 @@ from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email import encoders
 
-def send_email(origin, destination):
+def send_email(origin, destination, url):
     # Mail parameters
     EMAIL_ADDRESS = "monikagiemela.coding@gmail.com"
     MAIL_PWD = os.environ["MAIL_PWD"]
-    RECEPIENTS = ["monisiastella@gmail.com"]
+    RECEPIENTS = ["monikagiemela.coding@gmail.com"]
     ATTACHMENT_PATHS = ["/tmp/flight_prices.csv", "/tmp/screen_shot.png"]
 
     # Create message object
@@ -23,7 +23,7 @@ def send_email(origin, destination):
     smtpHost = "smtp.gmail.com"
     smtpPort = 587
     
-    mail_content_html = f"Zestawienie cen lotów dla <b>{origin}-{destination}</b> z dnia <b>{datetime.today()}</b>"
+    mail_content_html = f"Zestawienie cen lotów ze strony <b>{url}</b> dla <b>{origin}-{destination}</b> z dnia <b>{datetime.today()}</b>"
     msg.attach(MIMEText(mail_content_html, 'html'))
 
     # Create file attachments

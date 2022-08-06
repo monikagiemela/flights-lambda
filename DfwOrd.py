@@ -17,7 +17,7 @@ class DfwOrd(BaseCall):
         self.destination = "ORD"
 
     def make_url(self, journey):
-        url = f"https://www.momondo.com/flight-search/{self.origin}-{self.destination}/{journey['outbound']}/{journey['returning']}?fs=takeoff={self.takeoff_1}__{self.takeoff_2};cabin=-f;stops=0;airports={self.origin},{self.destination}&sort=price_a" 
+        url = f"https://www.momondo.com/flight-search/{self.origin}-{self.destination}/{journey['outbound']}/{journey['returning']}?fs=takeoff={self.takeoff_1}__{self.takeoff_2};stops=0;airports={self.origin},{self.destination}&sort=price_a" 
         return url
 
     def save_to_file(self, prices, journey, file):    
